@@ -6,7 +6,7 @@ import { startMic, stopMic, isMicRunning, setMinRms, setClarityThreshold, resume
 import { initTuner, onPitch as tunerOnPitch, setTunerConcertPitch, setTunerNoteStyle, setTunerInstrument, setTunerClarityThreshold, setTunerDisplayTrans, setTunerInTuneCents, toggleFullColor, toggleRefPitch, stepRefPitch, stopRefPitchTone, toggleSoundBack, stopSoundBack } from './tuner.js';
 import { initRecord, onRecordPitch, toggleRecording, togglePlayback, clearRecording, saveRecording, confirmSaveRecording, showRecordList, hideRecordList, loadRecording, deleteRecording, setRecordInstrument, setRecordConcertPitch, setRecordNoteStyle, setRecordSilenceGrace, setRecordRepairCallback, setRecordPreStartHook, setRecordInTuneCents, stopPlaybackIfPlaying } from './record.js';
 import { initScale, toggleScaleMeasure, clearScaleData, exportScaleData, importScaleData, deleteDataset, onScalePitch, setScaleInstrument, setScaleConcertPitch, setScaleNoteStyle, setScaleClarityThreshold, setScaleInTuneCents, confirmScaleDataset, switchScaleView } from './scale.js';
-import { initSettings, getSettings, onFamilyChange, onInstrumentChange, onScaleFamilyChange, onScaleInstrumentChange as _settingsScaleInstChange, onRecordFamilyChange, onRecordInstrumentChange, adjustConcertPitch, adjustInTuneCents, getInTuneCents, getRangeLevel, buildAllRangePickers, onNoteStyleChange, onDisplayTransChange, onMicDeviceChange, onMicDeviceChangeTuner, onMinVolumeChange, onClarityChange, exportAllData, importData, clearAllData, applyThemeUI, minVolumeToRms, clarityToThreshold, getDisplayTrans, refreshMicDevices, toggleCard, applyCalibratedSensitivity, getSilenceGrace, refreshSettingsUI, initWakeLock, onWakeLockToggle } from './settings.js';
+import { initSettings, getSettings, onModalFamilyChange, onModalInstrumentChange, openInstrumentModal, adjustConcertPitch, adjustInTuneCents, getInTuneCents, getRangeLevel, buildAllRangePickers, onNoteStyleChange, onDisplayTransChange, onMicDeviceChange, onMicDeviceChangeTuner, onMinVolumeChange, onClarityChange, exportAllData, importData, clearAllData, applyThemeUI, minVolumeToRms, clarityToThreshold, getDisplayTrans, refreshMicDevices, toggleCard, applyCalibratedSensitivity, getSilenceGrace, refreshSettingsUI, initWakeLock, onWakeLockToggle } from './settings.js';
 import { initCalibration, openCalibration, closeCalibration, startCalibrationRecord, stopCalibrationRecord, restartCalibrationRecord, applyCalibration } from './calibration.js';
 import { initExtInput, openExtInputModal, closeExtInputModal, retryExtInput, saveExtInput } from './extInput.js';
 import { zoomRecordIn, zoomRecordOut, seekToStart } from './record.js';
@@ -39,6 +39,8 @@ function _setMicActive(active) {
   const txt = document.getElementById('micStatusText');
   btn?.classList.toggle('active', active);
   if (txt) txt.textContent = active ? 'ON' : 'OFF';
+  const arrow = document.getElementById('micOffArrow');
+  if (arrow) arrow.classList.toggle('show', !active);
 }
 
 async function toggleMic() {
@@ -198,9 +200,12 @@ function exposeGlobals() {
   g.toggleSoundBack = toggleSoundBack;
   g.setLang = (lang) => { setLang(lang); applyI18n(); refreshSettingsUI(); refreshInstallBtn(); };
 
+  // Instrument modal (all tabs)
+  g.openInstrumentModal = openInstrumentModal;
+  g.onModalFamilyChange = onModalFamilyChange;
+  g.onModalInstrumentChange = onModalInstrumentChange;
+
   // Settings tab
-  g.onFamilyChange = onFamilyChange;
-  g.onInstrumentChange = onInstrumentChange;
   g.adjustConcertPitch = adjustConcertPitch;
   g.adjustInTuneCents = adjustInTuneCents;
   g.onNoteStyleChange = onNoteStyleChange;
@@ -219,8 +224,6 @@ function exposeGlobals() {
   g.onWakeLockToggle = onWakeLockToggle;
 
   // Record tab
-  g.onRecordFamilyChange = onRecordFamilyChange;
-  g.onRecordInstrumentChange = onRecordInstrumentChange;
   g.toggleRecording = toggleRecording;
   g.togglePlayback = togglePlayback;
   g.zoomRecordIn = zoomRecordIn;
@@ -241,8 +244,6 @@ function exposeGlobals() {
   g.importScaleData = importScaleData;
   g.deleteDataset = deleteDataset;
   g.confirmScaleDataset = confirmScaleDataset;
-  g.onScaleFamilyChange = onScaleFamilyChange;
-  g.onScaleInstrumentChange = _settingsScaleInstChange;
   g.switchScaleView = switchScaleView;
   g.showScaleHelp = () => openModal('scaleHelpModal');
 

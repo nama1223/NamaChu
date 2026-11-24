@@ -87,7 +87,7 @@ export function setScaleClarityThreshold(v) { _clarityThreshold = v; }
 
 let _inTuneCents = 5;
 export function setScaleInTuneCents(n) { _inTuneCents = n; renderChart(); }
-// onScaleInstrumentChange は settings.js で定義・app.js でグローバル登録
+// 楽器の変更は共通モーダル経由で settings.js が onSettingsChange として伝播してくる
 
 // ---- Measure control ----
 export function toggleScaleMeasure() {

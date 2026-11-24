@@ -1,6 +1,6 @@
 /* NamaChu — 設定タブ */
 
-import { INSTRUMENTS, INSTRUMENT_FAMILIES, DISPLAY_TRANSPOSITIONS, getInstrument, noteName, midiToNoteInfo, lsGet, lsSet, showToast } from './utils.js';
+import { INSTRUMENTS, INSTRUMENT_FAMILIES, DISPLAY_TRANSPOSITIONS, getInstrument, noteName, midiToNoteInfo, lsGet, lsSet, showToast, openModal } from './utils.js';
 import { getMicDevices, setMicDeviceId } from './audio.js';
 import { t, getLang } from './i18n.js';
 
@@ -69,9 +69,7 @@ function _buildFamilyHtml(lang) {
 
 // (ファミリーセレクト, 楽器セレクト) のペア定義
 const _SELECT_PAIRS = [
-  ['familySelect',      'instrumentSelect'],
-  ['scaleFamilySelect', 'scaleMeasureInstrument'],
-  ['recordFamilySelect','recordInstrumentSelect'],
+  ['modalFamilySelect', 'modalInstrumentSelect'],
 ];
 
 function populateInstrumentSelect() {
@@ -88,97 +86,28 @@ function populateInstrumentSelect() {
   updateInstrumentInfo();
 }
 
-// 設定タブ: ファミリー変更
-export function onFamilyChange() {
-  const famSel = document.getElementById('familySelect');
+// 楽器選択モーダル: ファミリー変更
+export function onModalFamilyChange() {
+  const famSel = document.getElementById('modalFamilySelect');
   if (!famSel) return;
-  const familyId = famSel.value;
-  const newInstId = _refillInstsByFamily('instrumentSelect', familyId, null);
-  _settings.instrumentId = newInstId;
-  // スケール・記録タブも同期
-  const scaleFamSel = document.getElementById('scaleFamilySelect');
-  if (scaleFamSel) scaleFamSel.value = familyId;
-  _refillInstsByFamily('scaleMeasureInstrument', familyId, newInstId);
-  const recFamSel = document.getElementById('recordFamilySelect');
-  if (recFamSel) recFamSel.value = familyId;
-  _refillInstsByFamily('recordInstrumentSelect', familyId, newInstId);
+  _settings.instrumentId = _refillInstsByFamily('modalInstrumentSelect', famSel.value, null);
   updateInstrumentInfo();
   saveAndNotify();
 }
 
-// 設定タブ: 楽器変更
-export function onInstrumentChange() {
-  const sel = document.getElementById('instrumentSelect');
+// 楽器選択モーダル: 楽器変更
+export function onModalInstrumentChange() {
+  const sel = document.getElementById('modalInstrumentSelect');
   if (!sel) return;
   _settings.instrumentId = sel.value;
-  const scaleInstSel = document.getElementById('scaleMeasureInstrument');
-  if (scaleInstSel) scaleInstSel.value = _settings.instrumentId;
-  const recInstSel = document.getElementById('recordInstrumentSelect');
-  if (recInstSel) recInstSel.value = _settings.instrumentId;
   updateInstrumentInfo();
   saveAndNotify();
 }
 
-// スケールタブ: ファミリー変更
-export function onScaleFamilyChange() {
-  const famSel = document.getElementById('scaleFamilySelect');
-  if (!famSel) return;
-  const familyId = famSel.value;
-  const newInstId = _refillInstsByFamily('scaleMeasureInstrument', familyId, null);
-  _settings.instrumentId = newInstId;
-  // 設定・記録タブも同期
-  const settingsFamSel = document.getElementById('familySelect');
-  if (settingsFamSel) settingsFamSel.value = familyId;
-  _refillInstsByFamily('instrumentSelect', familyId, newInstId);
-  const recFamSel = document.getElementById('recordFamilySelect');
-  if (recFamSel) recFamSel.value = familyId;
-  _refillInstsByFamily('recordInstrumentSelect', familyId, newInstId);
-  updateInstrumentInfo();
-  saveAndNotify();
-}
-
-// スケールタブ: 楽器変更
-export function onScaleInstrumentChange() {
-  const sel = document.getElementById('scaleMeasureInstrument');
-  if (!sel) return;
-  _settings.instrumentId = sel.value;
-  const settingsInstSel = document.getElementById('instrumentSelect');
-  if (settingsInstSel) settingsInstSel.value = _settings.instrumentId;
-  const recInstSel = document.getElementById('recordInstrumentSelect');
-  if (recInstSel) recInstSel.value = _settings.instrumentId;
-  updateInstrumentInfo();
-  saveAndNotify();
-}
-
-// 記録タブ: ファミリー変更
-export function onRecordFamilyChange() {
-  const famSel = document.getElementById('recordFamilySelect');
-  if (!famSel) return;
-  const familyId = famSel.value;
-  const newInstId = _refillInstsByFamily('recordInstrumentSelect', familyId, null);
-  _settings.instrumentId = newInstId;
-  // 設定・スケールタブも同期
-  const settingsFamSel = document.getElementById('familySelect');
-  if (settingsFamSel) settingsFamSel.value = familyId;
-  _refillInstsByFamily('instrumentSelect', familyId, newInstId);
-  const scaleFamSel = document.getElementById('scaleFamilySelect');
-  if (scaleFamSel) scaleFamSel.value = familyId;
-  _refillInstsByFamily('scaleMeasureInstrument', familyId, newInstId);
-  updateInstrumentInfo();
-  saveAndNotify();
-}
-
-// 記録タブ: 楽器変更
-export function onRecordInstrumentChange() {
-  const sel = document.getElementById('recordInstrumentSelect');
-  if (!sel) return;
-  _settings.instrumentId = sel.value;
-  const settingsInstSel = document.getElementById('instrumentSelect');
-  if (settingsInstSel) settingsInstSel.value = _settings.instrumentId;
-  const scaleInstSel = document.getElementById('scaleMeasureInstrument');
-  if (scaleInstSel) scaleInstSel.value = _settings.instrumentId;
-  updateInstrumentInfo();
-  saveAndNotify();
+// 楽器選択モーダルを開く（全タブ共通の入口）
+export function openInstrumentModal() {
+  populateInstrumentSelect();
+  openModal('instrumentModal');
 }
 
 function updateInstrumentInfo() {
@@ -205,6 +134,9 @@ function updateInstrumentInfo() {
 
   const recordBtn = document.getElementById('recordInstrumentBtn');
   if (recordBtn) recordBtn.textContent = lang === 'ja' ? inst.nameJa : inst.nameEn;
+
+  const scaleBtn = document.getElementById('scaleInstrumentBtn');
+  if (scaleBtn) scaleBtn.textContent = lang === 'ja' ? inst.nameJa : inst.nameEn;
 }
 
 // ---- Concert pitch ----
@@ -225,14 +157,14 @@ export function setRangeLevel(n) {
   saveAndNotify();
 }
 
-// 短縮ラベル（タブ内）とフルラベル（設定内）
+// 短縮ラベル（タブ内）とフルラベル（楽器選択モーダル内）
 const _RANGE_SHORT = { ja: ['初','中','上','Ｐ'], en: ['Beg','Int','Adv','Pro'] };
 const _RANGE_FULL  = { ja: ['初級','中級','上級','プロ'], en: ['Beginner','Intermediate','Advanced','Pro'] };
 
 export function buildAllRangePickers() {
   _refreshRangePickers();
   // スワイプ・ホイールリスナーを全ピッカーに設置（1回のみ）
-  for (const id of ['rangePicker-tuner','rangePicker-record','rangePicker-scale','rangePicker-settings']) {
+  for (const id of ['rangePicker-tuner','rangePicker-record','rangePicker-scale','rangePicker-modal']) {
     const el = document.getElementById(id);
     if (el && !el.dataset.gesturesAttached) {
       el.dataset.gesturesAttached = '1';
@@ -258,10 +190,10 @@ export function buildAllRangePickers() {
 function _refreshRangePickers() {
   const lang = getLang();
   const level = getRangeLevel();
-  for (const id of ['rangePicker-tuner','rangePicker-record','rangePicker-scale','rangePicker-settings']) {
+  for (const id of ['rangePicker-tuner','rangePicker-record','rangePicker-scale','rangePicker-modal']) {
     const el = document.getElementById(id);
     if (!el) continue;
-    const compact = id !== 'rangePicker-settings';
+    const compact = id !== 'rangePicker-modal';
     const labels = compact ? _RANGE_SHORT[lang] : _RANGE_FULL[lang];
     el.innerHTML = labels.map((l, i) =>
       `<button class="range-lvl-btn${i === level ? ' active' : ''}" data-lvl="${i}">${l}</button>`
@@ -500,13 +432,10 @@ function saveAndNotify() {
 
 function updateCardSummaries() {
   const lang = getLang();
-  const inst = getInstrument(_settings.instrumentId);
-  const instName = lang === 'ja' ? inst.nameJa : inst.nameEn;
   const dt = getDisplayTrans();
   const dtName = lang === 'ja' ? dt.nameJa : dt.nameEn;
   const noteStyleLabel = _settings.noteStyle === 'do' ? t('label_solfege') : 'CDEFG';
 
-  _setSummary('summary-instrument', instName);
   _setSummary('summary-pitch', `A = ${_settings.concertPitch} Hz`);
   _setSummary('summary-notestyle', `${noteStyleLabel} / ${dtName}`);
   _setSummary('summary-sensitivity', `${t('label_vol_short')} ${_settings.minVolume} / ${t('label_clarity_short')} ${_settings.clarity}`);

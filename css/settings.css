@@ -62,7 +62,7 @@
   transform: translateX(22px);
 }
 
-/* ---- 楽器2カラム選択 (設定タブ・音階タブ共通) ---- */
+/* ---- 楽器2カラム選択 (楽器選択モーダル内) ---- */
 .instrument-dual-select {
   display: flex;
   gap: 6px;

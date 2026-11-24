@@ -103,6 +103,7 @@
           <button class="mic-btn" id="micToggleBtn" onclick="toggleMic()">🎤</button>
           <span class="mic-status-text" id="micStatusText">OFF</span>
         </div>
+        <span class="mic-off-arrow show" id="micOffArrow">◀</span>
       </div>
     </div>
 
@@ -117,7 +118,7 @@
     </div>
 
     <div class="tuner-footer">
-      <span class="instrument-badge" id="instrumentBadge" onclick="switchTab('settings')"></span>
+      <span class="instrument-badge" id="instrumentBadge" onclick="openInstrumentModal()"></span>
       <div id="rangePicker-tuner" class="range-picker-compact" title="スクロール/スワイプで音域レベル変更"></div>
       <div class="tuner-footer-right">
         <span class="concert-pitch-badge" id="concertPitchBadge">A = 442 Hz</span>
@@ -129,7 +130,7 @@
   <div id="tab-record" class="tab-content">
     <div class="header-row">
       <h1 data-i18n="tab_record">音階記録</h1>
-      <button class="record-inst-btn" id="recordInstrumentBtn" onclick="openModal('recordInstrumentModal')"></button>
+      <button class="record-inst-btn" id="recordInstrumentBtn" onclick="openInstrumentModal()"></button>
       <div class="record-header-btns">
         <button class="icon-btn" id="saveRecordBtn" onclick="saveRecording()" title="保存">💾</button>
         <button class="icon-btn" id="loadRecordBtn" onclick="showRecordList()" title="読み込み">📂</button>
@@ -180,11 +181,7 @@
     </div>
 
     <div class="scale-instrument-row">
-      <label data-i18n="label_instrument">楽器</label>
-      <div class="instrument-dual-select">
-        <select id="scaleFamilySelect" onchange="onScaleFamilyChange()"></select>
-        <select id="scaleMeasureInstrument" onchange="onScaleInstrumentChange()"></select>
-      </div>
+      <button class="scale-inst-btn" id="scaleInstrumentBtn" onclick="openInstrumentModal()"></button>
       <div id="rangePicker-scale" class="range-picker-compact" title="スクロール/スワイプで音域レベル変更"></div>
     </div>
 
@@ -253,35 +250,6 @@
           <span class="toggle-thumb" id="wakeLockThumb"></span>
         </span>
       </label>
-    </div>
-
-    <!-- 楽器 -->
-    <div class="setting-card" id="card-instrument">
-      <div class="setting-card-header" onclick="toggleCard('card-instrument')">
-        <div class="setting-card-title-wrap">
-          <span class="setting-card-title" data-i18n="label_instrument">楽器</span>
-          <span class="card-summary" id="summary-instrument"></span>
-        </div>
-        <span class="card-arrow">▼</span>
-      </div>
-      <div class="setting-card-body">
-        <div class="instrument-dual-select">
-          <select id="familySelect" onchange="onFamilyChange()"></select>
-          <select id="instrumentSelect" onchange="onInstrumentChange()"></select>
-        </div>
-        <div class="setting-row" style="margin-top:8px;">
-          <label data-i18n="label_transposition">移調</label>
-          <span id="transpositionLabel" class="setting-value-badge"></span>
-        </div>
-        <div class="setting-row">
-          <label data-i18n="label_range">音域</label>
-          <span id="rangeLabel" class="setting-value-badge"></span>
-        </div>
-        <div class="setting-row" style="margin-top:6px;align-items:center;">
-          <label data-i18n="label_range_level">音域レベル</label>
-          <div id="rangePicker-settings" class="range-picker" title="スクロール/スワイプで切り替え"></div>
-        </div>
-      </div>
     </div>
 
     <!-- ピッチ基準 -->
@@ -458,16 +426,28 @@
 
 <div class="ad-spacer"></div>
 
-<!-- ===== 楽器選択モーダル（音階記録タブ） ===== -->
-<div class="modal-overlay" id="recordInstrumentModal" onclick="if(event.target===this)closeModal('recordInstrumentModal')">
+<!-- ===== 楽器選択モーダル（全タブ共通） ===== -->
+<div class="modal-overlay" id="instrumentModal" onclick="if(event.target===this)closeModal('instrumentModal')">
   <div class="modal-content">
     <h2 data-i18n="label_instrument">楽器</h2>
-    <div class="instrument-dual-select" style="margin-bottom:16px;">
-      <select id="recordFamilySelect" onchange="onRecordFamilyChange()"></select>
-      <select id="recordInstrumentSelect" onchange="onRecordInstrumentChange()"></select>
+    <div class="instrument-dual-select" style="margin-bottom:12px;">
+      <select id="modalFamilySelect" onchange="onModalFamilyChange()"></select>
+      <select id="modalInstrumentSelect" onchange="onModalInstrumentChange()"></select>
+    </div>
+    <div class="setting-row">
+      <label data-i18n="label_transposition">移調</label>
+      <span id="transpositionLabel" class="setting-value-badge"></span>
+    </div>
+    <div class="setting-row">
+      <label data-i18n="label_range">音域</label>
+      <span id="rangeLabel" class="setting-value-badge"></span>
+    </div>
+    <div class="setting-row" style="margin-top:6px;align-items:center;">
+      <label data-i18n="label_range_level">音域レベル</label>
+      <div id="rangePicker-modal" class="range-picker" title="スクロール/スワイプで切り替え"></div>
     </div>
     <div class="modal-buttons">
-      <button onclick="closeModal('recordInstrumentModal')" data-i18n="btn_close">閉じる</button>
+      <button onclick="closeModal('instrumentModal')" data-i18n="btn_close">閉じる</button>
     </div>
   </div>
 </div>
