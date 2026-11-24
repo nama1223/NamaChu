@@ -56,53 +56,53 @@ export const INSTRUMENT_FAMILIES = [
 //   MIDIノート番号: C4=60, A4=69。半音ごとに±1。
 export const INSTRUMENTS = [
   // Double Reed
-  { id: 'ob',           family: 'double_reed', nameJa: 'オーボエ',                   nameEn: 'Oboe',                trans: 0,   ranges: [[58,77],[58,84],[58,88],[58,91]] },
-  { id: 'cor_anglais',  family: 'double_reed', nameJa: 'コールアングレ',             nameEn: 'Cor Anglais (F)',     trans: -7,  ranges: [[51,69],[51,75],[51,79],[51,81]] },
-  { id: 'fg',           family: 'double_reed', nameJa: 'ファゴット',                 nameEn: 'Bassoon',             trans: 0,   ranges: [[34,58],[34,65],[34,72],[34,75]] },
-  { id: 'contrafg',     family: 'double_reed', nameJa: 'コントラファゴット',         nameEn: 'Contrabassoon',       trans: 12,  ranges: [[22,46],[22,54],[22,60],[22,63]] },
+  { id: 'ob',           family: 'double_reed', nameJa: 'オーボエ',                   nameEn: 'Oboe',                trans: 0,   ranges: [[60,79],[58,84],[58,88],[58,91]] },
+  { id: 'cor_anglais',  family: 'double_reed', nameJa: 'コールアングレ',             nameEn: 'Cor Anglais (F)',     trans: -7,  ranges: [[55,72],[53,77],[51,79],[51,82]] },
+  { id: 'fg',           family: 'double_reed', nameJa: 'ファゴット',                 nameEn: 'Bassoon',             trans: 0,   ranges: [[41,62],[38,67],[36,72],[34,76]] },
+  { id: 'contrafg',     family: 'double_reed', nameJa: 'コントラファゴット',         nameEn: 'Contrabassoon',       trans: 12,  ranges: [[29,48],[26,55],[24,60],[22,64]] },
 
   // Single Reed — Saxophone
-  { id: 'sopranino_sax',family: 'single_reed', nameJa: 'ソプラニーノサックス (Eb)', nameEn: 'Sopranino Sax (Eb)',  trans: 3,   ranges: [[55,72],[55,79],[55,84],[55,87]] },
-  { id: 'sop_sax',      family: 'single_reed', nameJa: 'ソプラノサックス (Bb)',     nameEn: 'Soprano Sax (Bb)',    trans: -2,  ranges: [[56,72],[56,80],[56,84],[56,88]] },
-  { id: 'eb_alto',      family: 'single_reed', nameJa: 'アルトサックス (Eb)',       nameEn: 'Alto Sax (Eb)',       trans: -9,  ranges: [[49,65],[49,74],[49,80],[49,87]] },
-  { id: 'bb_tenor',     family: 'single_reed', nameJa: 'テナーサックス (Bb)',       nameEn: 'Tenor Sax (Bb)',      trans: -14, ranges: [[44,60],[44,68],[44,75],[44,82]] },
-  { id: 'eb_bari',      family: 'single_reed', nameJa: 'バリトンサックス (Eb)',     nameEn: 'Bari Sax (Eb)',       trans: -21, ranges: [[37,53],[37,61],[37,68],[37,75]] },
-  { id: 'bass_sax',     family: 'single_reed', nameJa: 'バスサックス (Bb)',         nameEn: 'Bass Sax (Bb)',       trans: -26, ranges: [[30,46],[30,54],[30,61],[30,66]] },
+  { id: 'sopranino_sax',family: 'single_reed', nameJa: 'ソプラニーノサックス (Eb)', nameEn: 'Sopranino Sax (Eb)',  trans: 3,   ranges: [[63,81],[61,96],[61,99],[61,102]] },
+  { id: 'sop_sax',      family: 'single_reed', nameJa: 'ソプラノサックス (Bb)',     nameEn: 'Soprano Sax (Bb)',    trans: -2,  ranges: [[58,76],[56,91],[56,94],[56,97]] },
+  { id: 'eb_alto',      family: 'single_reed', nameJa: 'アルトサックス (Eb)',       nameEn: 'Alto Sax (Eb)',       trans: -9,  ranges: [[51,69],[49,84],[49,87],[49,90]] },
+  { id: 'bb_tenor',     family: 'single_reed', nameJa: 'テナーサックス (Bb)',       nameEn: 'Tenor Sax (Bb)',      trans: -14, ranges: [[46,64],[44,79],[44,82],[44,85]] },
+  { id: 'eb_bari',      family: 'single_reed', nameJa: 'バリトンサックス (Eb)',     nameEn: 'Bari Sax (Eb)',       trans: -21, ranges: [[39,57],[37,69],[37,72],[37,75]] },
+  { id: 'bass_sax',     family: 'single_reed', nameJa: 'バスサックス (Bb)',         nameEn: 'Bass Sax (Bb)',       trans: -26, ranges: [[34,50],[32,64],[32,67],[32,70]] },
   // Single Reed — Clarinet
-  { id: 'eb_clar',      family: 'single_reed', nameJa: 'クラリネット (Eb)',         nameEn: 'Clarinet (Eb)',       trans: 3,   ranges: [[55,72],[55,84],[55,92],[55,96]] },
-  { id: 'bb_clar',      family: 'single_reed', nameJa: 'クラリネット (Bb)',         nameEn: 'Clarinet (Bb)',       trans: -2,  ranges: [[50,72],[50,84],[50,91],[50,94]] },
-  { id: 'a_clar',       family: 'single_reed', nameJa: 'クラリネット (A)',          nameEn: 'Clarinet (A)',        trans: -3,  ranges: [[49,71],[49,83],[49,90],[49,93]] },
-  { id: 'bassclar',     family: 'single_reed', nameJa: 'バスクラリネット (Bb)',     nameEn: 'Bass Clarinet (Bb)', trans: -14, ranges: [[38,60],[38,70],[38,77],[38,80]] },
-  { id: 'contraclar',   family: 'single_reed', nameJa: 'コントラバスクラリネット',  nameEn: 'Contrabass Clarinet', trans: -26, ranges: [[26,48],[26,58],[26,65],[26,68]] },
+  { id: 'eb_clar',      family: 'single_reed', nameJa: 'クラリネット (Eb)',         nameEn: 'Clarinet (Eb)',       trans: 3,   ranges: [[57,77],[55,86],[55,92],[55,96]] },
+  { id: 'bb_clar',      family: 'single_reed', nameJa: 'クラリネット (Bb)',         nameEn: 'Clarinet (Bb)',       trans: -2,  ranges: [[50,76],[50,84],[50,90],[50,95]] },
+  { id: 'a_clar',       family: 'single_reed', nameJa: 'クラリネット (A)',          nameEn: 'Clarinet (A)',        trans: -3,  ranges: [[49,75],[49,83],[49,89],[49,94]] },
+  { id: 'bassclar',     family: 'single_reed', nameJa: 'バスクラリネット (Bb)',     nameEn: 'Bass Clarinet (Bb)', trans: -14, ranges: [[43,62],[40,72],[38,77],[38,81]] },
+  { id: 'contraclar',   family: 'single_reed', nameJa: 'コントラバスクラリネット',  nameEn: 'Contrabass Clarinet', trans: -26, ranges: [[34,50],[31,60],[28,65],[26,69]] },
 
   // Air Reed
-  { id: 'piccolo',      family: 'air_reed',    nameJa: 'ピッコロ',                  nameEn: 'Piccolo',             trans: 12,  ranges: [[74,88],[74,96],[74,103],[74,108]] },
-  { id: 'fl',           family: 'air_reed',    nameJa: 'フルート',                  nameEn: 'Flute',               trans: 0,   ranges: [[60,79],[60,88],[60,94],[60,96]] },
-  { id: 'alt_fl',       family: 'air_reed',    nameJa: 'アルトフルート (G)',         nameEn: 'Alto Flute (G)',      trans: -7,  ranges: [[55,72],[55,81],[55,87],[55,91]] },
-  { id: 'bass_fl',      family: 'air_reed',    nameJa: 'バスフルート',              nameEn: 'Bass Flute',          trans: -12, ranges: [[48,65],[48,74],[48,80],[48,84]] },
+  { id: 'piccolo',      family: 'air_reed',    nameJa: 'ピッコロ',                  nameEn: 'Piccolo',             trans: 12,  ranges: [[89,103],[87,110],[86,116],[86,120]] },
+  { id: 'fl',           family: 'air_reed',    nameJa: 'フルート',                  nameEn: 'Flute',               trans: 0,   ranges: [[60,81],[60,88],[60,93],[60,97]] },
+  { id: 'alt_fl',       family: 'air_reed',    nameJa: 'アルトフルート (G)',         nameEn: 'Alto Flute (G)',      trans: -7,  ranges: [[57,76],[55,83],[55,88],[55,92]] },
+  { id: 'bass_fl',      family: 'air_reed',    nameJa: 'バスフルート',              nameEn: 'Bass Flute',          trans: -12, ranges: [[53,67],[50,76],[48,81],[48,85]] },
 
   // High Brass
-  { id: 'eb_trumpet',   family: 'brass_high',  nameJa: 'トランペット (Eb)',          nameEn: 'Trumpet (Eb)',        trans: 3,   ranges: [[55,72],[55,79],[55,84],[55,87]] },
-  { id: 'bb_trumpet',   family: 'brass_high',  nameJa: 'トランペット (Bb)',          nameEn: 'Trumpet (Bb)',        trans: -2,  ranges: [[52,69],[52,77],[52,82],[52,84]] },
-  { id: 'c_trumpet',    family: 'brass_high',  nameJa: 'トランペット (C)',           nameEn: 'Trumpet (C)',         trans: 0,   ranges: [[52,69],[52,77],[52,82],[52,84]] },
-  { id: 'cornet',       family: 'brass_high',  nameJa: 'コルネット (Bb)',            nameEn: 'Cornet (Bb)',         trans: -2,  ranges: [[52,69],[52,77],[52,82],[52,84]] },
-  { id: 'flugelhorn',   family: 'brass_high',  nameJa: 'フリューゲルホルン (Bb)',   nameEn: 'Flugelhorn (Bb)',     trans: -2,  ranges: [[52,67],[52,74],[52,79],[52,81]] },
+  { id: 'eb_trumpet',   family: 'brass_high',  nameJa: 'トランペット (Eb)',          nameEn: 'Trumpet (Eb)',        trans: 3,   ranges: [[57,76],[57,81],[57,85],[57,88]] },
+  { id: 'bb_trumpet',   family: 'brass_high',  nameJa: 'トランペット (Bb)',          nameEn: 'Trumpet (Bb)',        trans: -2,  ranges: [[53,74],[52,79],[52,83],[52,86]] },
+  { id: 'c_trumpet',    family: 'brass_high',  nameJa: 'トランペット (C)',           nameEn: 'Trumpet (C)',         trans: 0,   ranges: [[54,74],[54,79],[54,83],[54,86]] },
+  { id: 'cornet',       family: 'brass_high',  nameJa: 'コルネット (Bb)',            nameEn: 'Cornet (Bb)',         trans: -2,  ranges: [[53,73],[52,78],[52,82],[52,85]] },
+  { id: 'flugelhorn',   family: 'brass_high',  nameJa: 'フリューゲルホルン (Bb)',   nameEn: 'Flugelhorn (Bb)',     trans: -2,  ranges: [[53,71],[52,76],[52,80],[52,83]] },
 
   // Mid Brass
-  { id: 'f_horn',       family: 'brass_mid',   nameJa: 'ホルン (F)',                 nameEn: 'Horn (F)',            trans: -7,  ranges: [[34,60],[34,69],[34,74],[34,77]] },
-  { id: 'tenor_horn',   family: 'brass_mid',   nameJa: 'テナーホーン (Eb)',          nameEn: 'Tenor Horn (Eb)',     trans: 3,   ranges: [[43,60],[43,67],[43,74],[43,77]] },
-  { id: 'bb_trombone',  family: 'brass_mid',   nameJa: 'テナートロンボーン',         nameEn: 'Trombone (Bb)',       trans: 0,   ranges: [[40,58],[40,65],[40,72],[40,77]] },
-  { id: 'bass_trombone',family: 'brass_mid',   nameJa: 'バストロンボーン',           nameEn: 'Bass Trombone',       trans: 0,   ranges: [[34,54],[34,62],[34,67],[34,72]] },
+  { id: 'f_horn',       family: 'brass_mid',   nameJa: 'ホルン (F)',                 nameEn: 'Horn (F)',            trans: -7,  ranges: [[46,64],[41,70],[37,74],[34,78]] },
+  { id: 'tenor_horn',   family: 'brass_mid',   nameJa: 'テナーホーン (Eb)',          nameEn: 'Tenor Horn (Eb)',     trans: 3,   ranges: [[47,66],[45,71],[45,75],[45,78]] },
+  { id: 'bb_trombone',  family: 'brass_mid',   nameJa: 'テナートロンボーン',         nameEn: 'Trombone (Bb)',       trans: 0,   ranges: [[43,67],[38,70],[34,72],[29,77]] },
+  { id: 'bass_trombone',family: 'brass_mid',   nameJa: 'バストロンボーン',           nameEn: 'Bass Trombone',       trans: 0,   ranges: [[41,60],[38,65],[36,69],[34,74]] },
   { id: 'bb_euph',      family: 'brass_mid',   nameJa: 'ユーフォニアム (Bb)',        nameEn: 'Euphonium (Bb)',      trans: -2,  ranges: [[43,67],[38,70],[34,72],[29,77]] },
 
   // Low Brass
-  { id: 'bb_tuba',      family: 'brass_low',   nameJa: 'テューバ (Bb)',              nameEn: 'Tuba (Bb)',           trans: -2,  ranges: [[29,48],[29,55],[29,60],[29,65]] },
-  { id: 'c_tuba',       family: 'brass_low',   nameJa: 'テューバ (C)',               nameEn: 'Tuba (C)',            trans: 0,   ranges: [[29,48],[29,55],[29,60],[29,65]] },
-  { id: 'eb_tuba',      family: 'brass_low',   nameJa: 'テューバ (Eb)',              nameEn: 'Tuba (Eb)',           trans: 3,   ranges: [[29,48],[29,55],[29,60],[29,65]] },
-  { id: 'f_tuba',       family: 'brass_low',   nameJa: 'テューバ (F)',               nameEn: 'Tuba (F)',            trans: -7,  ranges: [[29,48],[29,55],[29,60],[29,65]] },
+  { id: 'bb_tuba',      family: 'brass_low',   nameJa: 'テューバ (Bb)',              nameEn: 'Tuba (Bb)',           trans: -2,  ranges: [[36,53],[33,58],[31,62],[29,65]] },
+  { id: 'c_tuba',       family: 'brass_low',   nameJa: 'テューバ (C)',               nameEn: 'Tuba (C)',            trans: 0,   ranges: [[36,54],[33,59],[31,63],[29,66]] },
+  { id: 'eb_tuba',      family: 'brass_low',   nameJa: 'テューバ (Eb)',              nameEn: 'Tuba (Eb)',           trans: 3,   ranges: [[38,56],[35,61],[33,65],[31,68]] },
+  { id: 'f_tuba',       family: 'brass_low',   nameJa: 'テューバ (F)',               nameEn: 'Tuba (F)',            trans: -7,  ranges: [[41,58],[38,63],[36,67],[34,70]] },
 
   // Other
-  { id: 'concert',      family: 'other',       nameJa: 'Concert (C)',               nameEn: 'Concert (C)',         trans: 0,   ranges: [[48,67],[48,72],[48,79],[48,84]] },
+  { id: 'concert',      family: 'other',       nameJa: 'Concert (C)',               nameEn: 'Concert (C)',         trans: 0,   ranges: [[53,74],[50,79],[49,82],[48,85]] },
 ];
 
 // rangeLevel: 0=初級 1=中級 2=上級 3=プロ（デフォルト1）
