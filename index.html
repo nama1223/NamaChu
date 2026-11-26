@@ -459,6 +459,17 @@
   </div>
 </div>
 
+<!-- ===== 全消去の確認モーダル ===== -->
+<div class="modal-overlay" id="confirmClearModal" onclick="if(event.target===this)closeModal('confirmClearModal')">
+  <div class="modal-content">
+    <p id="confirmClearMsg" style="margin:4px 0 6px;line-height:1.6;"></p>
+    <div class="modal-buttons">
+      <button onclick="closeModal('confirmClearModal')" data-i18n="btn_cancel">キャンセル</button>
+      <button class="btn-danger" onclick="doClearAllData()" data-i18n="btn_clear_all">全消去</button>
+    </div>
+  </div>
+</div>
+
 <!-- ===== 外部機器入力設定モーダル ===== -->
 <div class="modal-overlay" id="extInputModal" onclick="if(event.target===this)closeExtInputModal()">
   <div class="modal-content">

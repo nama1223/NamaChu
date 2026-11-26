@@ -342,6 +342,11 @@ button {
   color: #fff;
   border-color: var(--primary-color);
 }
+.modal-buttons .btn-danger {
+  background: var(--highlight-color);
+  color: #fff;
+  border-color: var(--highlight-color);
+}
 
 /* ---- Theme grid ---- */
 .theme-grid {

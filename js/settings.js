@@ -1,6 +1,6 @@
 /* NamaChu — 設定タブ */
 
-import { INSTRUMENTS, INSTRUMENT_FAMILIES, DISPLAY_TRANSPOSITIONS, getInstrument, noteName, midiToNoteInfo, lsGet, lsSet, showToast, openModal } from './utils.js';
+import { INSTRUMENTS, INSTRUMENT_FAMILIES, DISPLAY_TRANSPOSITIONS, getInstrument, noteName, midiToNoteInfo, lsGet, lsSet, showToast, openModal, closeModal } from './utils.js';
 import { getMicDevices, setMicDeviceId } from './audio.js';
 import { t, getLang } from './i18n.js';
 
@@ -386,7 +386,12 @@ export function importData() {
 }
 
 export function clearAllData() {
-  if (!confirm(t('confirm_clear_all'))) return;
+  document.getElementById('confirmClearMsg').textContent = t('confirm_clear_all');
+  openModal('confirmClearModal');
+}
+
+export function doClearAllData() {
+  closeModal('confirmClearModal');
   for (let i = localStorage.length - 1; i >= 0; i--) {
     const k = localStorage.key(i);
     if (k?.startsWith('namaChu_')) localStorage.removeItem(k);
